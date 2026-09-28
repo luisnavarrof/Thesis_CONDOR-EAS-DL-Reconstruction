@@ -235,3 +235,13 @@ where $\mathcal{L}_\text{cls}$ is the binary cross-entropy loss for gamma-hadron
 Training is stopped early when the combined validation loss fails to improve for 15 consecutive epochs, and the model checkpoint achieving the lowest validation loss is restored for final evaluation. No information from the test set is used at any point during training or hyperparameter search. Table~\ref{tab:hyperparameters} consolidates all hyperparameters of the final configuration.
 
 All experiments were conducted on a single NVIDIA GeForce RTX 3050 Ti Laptop GPU (4 GB VRAM) using TensorFlow 2.10 with CUDA 11.2. A full training run to convergence (61 epochs, with the best checkpoint at epoch 46) required approximately 45 minutes. The total model contains 531,375 parameters, of which 530,607 are trainable and 768 are non-trainable batch normalization statistics.
+
+\section{Code and Data Availability}
+\label{sec:code_availability}
+
+The source code of this thesis is publicly available in the repository given below. It contains the data pipeline, the model definition and training notebook, the scripts for every analysis in Chapter~\ref{ch:results}, the trained model, the result files from which all reported metrics and figures are computed, and the \LaTeX{} source of this document. The processed dataset is archived on Zenodo~\cite{navarro2025dataset}.
+
+\begin{center}
+    \href{https://github.com/luisnavarrof/Thesis_CONDOR-EAS-DL-Reconstruction}{\qrcode[height=2.6cm]{https://github.com/luisnavarrof/Thesis_CONDOR-EAS-DL-Reconstruction}}\\[0.6em]
+    {\small\url{https://github.com/luisnavarrof/Thesis_CONDOR-EAS-DL-Reconstruction}}
+\end{center}
