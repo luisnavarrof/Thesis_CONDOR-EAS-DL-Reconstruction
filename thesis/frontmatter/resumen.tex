@@ -1,0 +1,12 @@
+\chapter*{Resumen}
+
+La reconstrucción de duchas atmosféricas extensas (extensive air showers, EAS) en el régimen sub-TeV es un desafío central para los observatorios de astropartículas de gran altitud. En este trabajo desarrollamos y evaluamos un método de aprendizaje profundo multitarea que reconstruye simultáneamente tres propiedades de las EAS --- discriminación gamma-hadrón, ángulo cenital y energía primaria --- en el observatorio CONDOR (Desierto de Atacama, Chile, 5.300~m s.n.m.). El modelo es una arquitectura híbrida CNN--Transformer con dos streams de atención por tarea: uno sobre las características procesadas por la CNN y otro directamente sobre la secuencia cruda de hits.
+%
+Entrenado con datos simulados por CORSIKA en el rango 300--800~GeV, el modelo alcanza un AUC de 0{,}991 y un F1-score de 0{,}970 en la discriminación gamma-hadrón, un error angular medio de $0{,}484\degree$ en el ángulo cenital y un error absoluto medio de $103{,}72~\mathrm{GeV}$ en la energía. La importancia de características por permutación (PFI) y el análisis de ablación coinciden en que la información temporal domina la reconstrucción angular, mientras que las características espaciales y de energía depositada gobiernan la clasificación. La atención sobre la secuencia cruda muestra que cada tarea pondera una parte distinta de la secuencia: la clasificación, su borde inicial; la reconstrucción angular, su parte tardía.
+%
+Un estudio de dropout de detectores muestra que la discriminación gamma-hadrón es la tarea más tolerante a fallos, y que un núcleo denso favorece la clasificación y el ángulo, mientras que la energía requiere cobertura lateral; la optimización del \textit{layout} queda como trabajo futuro. Estos resultados muestran que el aprendizaje multitarea con explicabilidad integrada es un enfoque viable para la reconstrucción de EAS en observatorios de próxima generación.
+
+\bigskip
+
+\eskeywords{Rayos cósmicos, rayos gamma, duchas atmosféricas extensas, aprendizaje profundo, redes neuronales convolucionales, transformers, aprendizaje multitarea, inteligencia artificial explicable, mecanismos de atención}
+

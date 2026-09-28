@@ -1,0 +1,11 @@
+\chapter*{Abstract}
+
+The reconstruction of extensive air showers (EAS) in the sub-TeV regime is a central challenge for high-altitude astroparticle observatories. In this work, we develop and evaluate a multi-task deep learning method that simultaneously reconstructs three EAS properties --- gamma-hadron discrimination, zenith angle, and primary energy --- at the CONDOR Observatory (Atacama Desert, Chile, 5,300~m a.s.l.). The model is a hybrid CNN--Transformer architecture with two attention streams per task: one on CNN-processed features and one directly on the raw hit sequence.
+%
+Trained on CORSIKA-simulated events in the 300--800~GeV range, the model achieves an AUC of 0.991 and an F1-score of 0.970 for gamma-hadron discrimination, a mean angular error of $0.484\degree$ for the zenith angle, and a mean absolute error of $103.72~\mathrm{GeV}$ for the energy. Permutation feature importance (PFI) and feature ablation agree that temporal information dominates angular reconstruction, while spatial and deposited-energy features govern classification. Attention on the raw sequence shows that each task weights a different part of the sequence: classification, its leading edge; angular reconstruction, its late portion.
+%
+A detector dropout study shows that gamma-hadron discrimination is the most fault-tolerant task, and that a dense core favours classification and angular reconstruction, while energy needs lateral coverage; a full layout optimisation is left for future work. These results show that multi-task learning with integrated explainability is a viable approach to EAS reconstruction in next-generation astroparticle observatories.
+
+    \bigskip
+
+    \keywords{Cosmic ray, gamma ray, extensive air showers, deep learning, convolutional neural networks, transformers, multi-task learning, explainable artificial intelligence, attention mechanisms}

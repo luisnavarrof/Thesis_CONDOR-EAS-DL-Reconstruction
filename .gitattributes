@@ -1,0 +1,7 @@
+* text=auto
+*.bat text eol=crlf
+*.png binary
+*.pdf binary
+*.keras binary
+*.h5 binary
+*.npz binary

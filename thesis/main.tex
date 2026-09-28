@@ -1,0 +1,162 @@
+% Master's thesis, Departamento de Informática, Universidad Técnica Federico Santa María.
+% Based on the DI/UTFSM thesis template by Daniel San Martín Reyes.
+\documentclass[12pt, letterpaper]{book}
+
+%%% PACKAGES %%%
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{color}
+\usepackage{url}
+\usepackage{multirow}
+\usepackage{mathtools}
+\usepackage{tablefootnote}
+\usepackage{fancyhdr}
+\usepackage{longtable}
+\usepackage{pdfpages}
+\usepackage{siunitx}
+\usepackage{gensymb}
+\usepackage{physics}
+\usepackage[nosectionbib]{apacite}
+\usepackage{notoccite}
+\usepackage{placeins}
+\usepackage{pdflscape}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+
+% Float placement
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.70}
+\renewcommand{\textfraction}{0.12}
+\renewcommand{\floatpagefraction}{0.75}
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}
+
+\raggedbottom
+
+% Citation years in dark red
+\definecolor{darkred}{RGB}{139,0,0}
+\makeatletter
+\let\oldAPACyear\APACyear
+\renewcommand{\APACyear}[1]{\textcolor{darkred}{\oldAPACyear{#1}}}
+\makeatother
+
+%%% SETUP %%%
+
+% Hyperref %
+\hypersetup{
+    hidelinks,
+    linktoc=section,
+}
+
+% Bibtex %
+\bibliographystyle{apacite}
+
+
+% Definitions %
+% Text
+\providecommand{\keywords}[1]{\textbf{\textit{Keywords}}: #1.}
+\providecommand{\eskeywords}[1]{\textbf{\textit{Palabras clave}}: #1.}
+
+\usepackage[usenames]{xcolor}
+\definecolor{color_morado}{HTML}{9B59B6}
+\def\purple#1{\textcolor{color_morado}{#1}}
+
+
+\pagestyle{fancy}
+\fancyhf{}% Clear page header/footer
+\fancyhead[RO, LE]{\leftmark}
+\fancyfoot[C]{\thepage}
+
+%Hyphen
+% \hyphenation{} % Add words to hyphenate if needed
+
+
+\begin{document}
+
+    % Front %
+    %\maketitle
+    \input{frontmatter/title}
+    
+    % Committee %
+    \input{frontmatter/committee}
+    
+    % USM format margin
+    \newgeometry{top=.9in, bottom=.9in, left=4cm, right=2.5cm, headheight=15pt, headsep=0.2in, includehead}
+    
+    \pagenumbering{Roman} % Roman numbering for toc
+    
+    % Dedicatory
+    \input{frontmatter/dedication}
+    \let\cleardoublepage\clearpage
+    
+    % Acknowledgements
+    \input{frontmatter/acknowledgments}
+    \let\cleardoublepage\clearpage
+    
+    %Abstract
+    \input{frontmatter/resumen}
+    \addcontentsline{toc}{chapter}{Resumen}
+    \let\cleardoublepage\clearpage
+    
+    \input{frontmatter/abstract}
+    \addcontentsline{toc}{chapter}{Abstract}
+    
+    % General Index
+    \tableofcontents
+    \addcontentsline{toc}{chapter}{Contents}
+    \let\cleardoublepage\clearpage
+    
+    % List of Figures %
+    \listoffigures
+    \addcontentsline{toc}{chapter}{List of Figures}
+    \let\cleardoublepage\clearpage
+    
+    % List of Tables %
+    \listoftables
+    \addcontentsline{toc}{chapter}{List of Tables}
+    \let\cleardoublepage\clearpage
+    
+    \clearpage
+    
+    \pagenumbering{arabic} % Arabic numbering for chapters
+    
+    
+    %%% CHAPTERS %%%
+
+    % Chapter 1: Introduction %
+    \input{chapters/01_introduction}
+    
+    % Chapter 2: Theoretical Background %
+    \input{chapters/02_theoretical_background}
+    
+    % Chapter 3: Methodology %
+    \input{chapters/03_methodology}
+    
+    % Chapter 4: Results and Explainability %
+    \input{chapters/04_results}
+    
+    % Chapter 5: Conclusions %
+    \input{chapters/05_conclusions}
+
+    % References %
+    \cleardoublepage
+    % \addcontentsline{toc}{chapter}{References}
+    \renewcommand{\bibliographytypesize}{\small}
+    \begingroup
+    \setlength{\itemsep}{0.3ex plus 0.1ex}
+    \bibliography{references}
+    \endgroup
+    
+    % Appendix %
+    \input{appendix/00_appendix}
+
+\end{document}

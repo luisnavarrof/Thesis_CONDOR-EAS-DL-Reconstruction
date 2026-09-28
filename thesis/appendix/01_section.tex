@@ -1,0 +1,142 @@
+\chapter{Supplementary Material} \label{ch:appendix}
+
+\section{Atmospheric Depth} \label{sec:apx_depth}
+
+The development of an air shower is described as a function of \textit{atmospheric depth} rather than of altitude or of distance travelled, and quantities such as $X_{\text{max}}$ are consequently reported in $\mathrm{g \ cm}^{-2}$. This section sets out why that variable is the natural one and what the choice implies for the two aspects of this work that depend on it: the reconstruction of the zenith angle and the altitude of the observation site.
+
+The atmosphere is the target in which the cascade develops, and its density falls by orders of magnitude between the top of the atmosphere and the ground. The vertical atmospheric depth at an altitude $h$ is defined as the integral of the air density above that altitude,
+\begin{equation}
+    X_v(h) = \int_h^{\infty} \rho(h') \, \mathrm{d}h' \ ,
+    \label{eq:atmospheric_depth}
+\end{equation}
+that is, the mass of air per unit area contained in the column above the point in question, which is where the units come from. Because the atmosphere is in hydrostatic equilibrium, this column mass is exactly what a barometer measures: $X_v = P/g$, with $P$ the local pressure and $g$ the gravitational acceleration. The vertical depth at sea level, close to $1{,}030 \ \mathrm{g \ cm}^{-2}$, is standard atmospheric pressure written as a mass column.
+
+The reason this quantity, and not the geometric path length, is the coordinate of shower development is that the probability of an interaction depends on the amount of matter traversed. Consider a particle crossing a layer of thickness $\mathrm{d}l$ in air of density $\rho$, with a cross-section $\sigma$ per target nucleus of mass number $A$. The number density of targets is $n = \rho N_A / A$, so the interaction probability over the layer is $n \sigma \, \mathrm{d}l = (N_A \sigma / A) \, \rho \, \mathrm{d}l$. The density and the geometric length appear only through the product $\rho \, \mathrm{d}l \equiv \mathrm{d}X$, so the survival probability after traversing a depth $X$ is
+\begin{equation}
+    P_{\text{surv}}(X) = \exp\left(-X / \lambda\right) \ , \qquad \lambda = \frac{A}{N_A \sigma} \ ,
+    \label{eq:interaction_length}
+\end{equation}
+where the interaction length $\lambda$ is itself expressed in $\mathrm{g \ cm}^{-2}$. The same argument holds for radiative processes, whose characteristic scale is the radiation length, $X_0 \approx 36.6 \ \mathrm{g \ cm}^{-2}$ in air~\shortcite{ParticleDataGroup2024}. A particle does not respond to how far it has moved but to how much matter it has crossed, and depth is the variable that counts the latter. Expressing the atmosphere in metres would require carrying the altitude dependence of $\rho$ through every step of the calculation; expressing it in $\mathrm{g \ cm}^{-2}$ absorbs that dependence once and for all.
+
+A direct consequence is that the longitudinal profile of a shower is, to a good approximation, a universal function of $X$. Two showers of the same primary energy whose first interactions occur at different altitudes pass through the same sequence of generations, and their profiles coincide when expressed in depth even though they do not coincide when expressed in metres. This is why the Heitler model of Section~\ref{subsec:electromagnetic_showers} yields a depth of maximum, Equation~\ref{eq:xmax}, rather than a height of maximum, and why $X_{\text{max}}$ is comparable across showers, experiments, and sites.
+
+Expressed in these terms, the atmosphere is a calorimeter whose thickness is measured in radiation lengths: the vertical column at sea level amounts to $1{,}030 / 36.6 \approx 28 \, X_0$, and less at altitude. That thickness is not a fixed property of the instrument but is set jointly by the observation level and by the arrival direction of each individual shower, which is the sense in which a ground-based array measures every cascade at whatever stage of development it happens to have reached on arrival.
+
+A shower arriving at a zenith angle $\theta$ does not traverse the vertical column but the column along its own axis, known as the slant depth. For a plane-parallel atmosphere, the approximation adopted in CORSIKA~\shortcite{Heck1998}, the two are related by
+\begin{equation}
+    X(\theta) = X_v \sec\theta \ .
+    \label{eq:slant_depth}
+\end{equation}
+An inclined shower therefore crosses more matter before reaching the array than a vertical shower of the same energy: about 6\% more at $\theta = 20\degree$ and about 30\% more at $\theta = 40\degree$, the upper limit of the range simulated in this work. The approximation is accurate over that range and degrades only for nearly horizontal showers, where the curvature of the Earth can no longer be neglected. The physical consequence is that the zenith angle and the effective observation depth are two views of the same variable: a shower observed at larger $\theta$ is observed at a later stage of its development, with fewer surviving particles and a wider, more attenuated footprint. That systematic is what the angular reconstruction task exploits, and it is visible directly in the evolution of the mean footprint with $\theta$ shown in Figure~\ref{fig:angle_evolution}.
+
+The same relation accounts for the value of altitude in the design of a ground-based array. Table~\ref{tab:atmospheric_depths} lists the vertical depth at several observation levels. Placing the array at 5,300 m removes roughly half of the atmospheric column that a detector at sea level must look through, and about 90 $\mathrm{g \ cm}^{-2}$ relative to HAWC. Since the number of particles surviving to ground falls steeply with the depth traversed beyond the shower maximum, and sub-TeV showers reach their maximum high in the atmosphere, that difference translates into a substantially larger number of secondaries at ground level for a primary of a given energy. This is the origin of the low energy threshold discussed in Section~\ref{sec:condor_observatory}, and it is a property of the site rather than of the detector technology.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\captionof{table}[Vertical atmospheric depth at several observation levels.]{Vertical atmospheric depth at several observation levels, computed from the U.S.\ standard atmosphere. Values are rounded to the nearest $5 \ \mathrm{g \ cm}^{-2}$.}
+\label{tab:atmospheric_depths}
+\setlength{\tabcolsep}{8pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{llr}
+\toprule
+\textbf{Observation level} & \textbf{Altitude} & \textbf{Vertical depth} \\
+\midrule
+Sea level & 0 m & $1{,}030 \ \mathrm{g \ cm}^{-2}$ \\
+HAWC & 4,100 m & $620 \ \mathrm{g \ cm}^{-2}$ \\
+LHAASO & 4,410 m & $595 \ \mathrm{g \ cm}^{-2}$ \\
+CONDOR & 5,300 m & $530 \ \mathrm{g \ cm}^{-2}$ \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{center}
+
+\section{Model Architecture Summary} \label{sec:apx_architecture}
+
+Table~\ref{tab:model_layers} provides a layer-by-layer breakdown of the CNN-Transformer multi-task model and its parameter counts, grouped by functional block. Each Transformer stream is a pre-norm encoder block; the CNN streams operate on the 128-dimensional backbone output and the RAW streams on the six-dimensional masked hit sequence, which is why the former account for roughly twenty times the parameters of the latter. All counts are read directly from the trained model.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\captionof{table}[Layer-by-layer model summary.]{Layer-by-layer summary of the CNN-Transformer model, with parameter counts grouped by functional block.}
+\label{tab:model_layers}
+\small
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.05}
+\begin{tabular}{llr}
+\toprule
+\textbf{Component} & \textbf{Layer} & \textbf{Parameters} \\
+\midrule
+\multirow{7}{*}{CNN backbone}
+  & Conv1D (128 filters, $k$=7) + BN + ELU & 6,016 \\
+  & Conv1D (128 filters, $k$=7) + BN + ELU & 115,328 \\
+  & Conv1D (128 filters, $k$=7) + BN + ELU & 115,328 \\
+  & MaxPool1D (stride=2) & 0 \\
+  & Dense(128) + ELU & 16,512 \\
+  & Dense(256) + ELU + Dropout(0.4) & 33,024 \\
+  & Dense(128) + ELU & 32,896 \\
+\midrule
+\multirow{2}{*}{Transformer $\times$ 6}
+  & 3 CNN streams (LN + MHA + FFN) & 150,432 \\
+  & 3 RAW streams (LN + MHA + FFN) & 7,692 \\
+\midrule
+\multirow{3}{*}{Output heads}
+  & Classification: Dense(128) + Dense(1, sigmoid) & 18,049 \\
+  & Angle: Dense(128) + Dense(1, linear) & 18,049 \\
+  & Energy: Dense(128) + Dense(1, linear) & 18,049 \\
+\midrule
+\multicolumn{2}{l}{\textbf{Total parameters}} & \textbf{531,375} \\
+\multicolumn{2}{l}{\quad Trainable} & 530,607 \\
+\multicolumn{2}{l}{\quad Non-trainable (BN statistics)} & 768 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{center}
+
+\section{Global Feature Definitions} \label{sec:apx_global_features}
+
+Table~\ref{tab:global_features_order} specifies the exact computation and ordering of the five global features as implemented in the preprocessing pipeline.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\captionof{table}[Global feature computation and ordering.]{Global feature vector: computation, ordering, and normalization as implemented in the code.}
+\label{tab:global_features_order}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{clll}
+\toprule
+\textbf{Index} & \textbf{Name} & \textbf{Computation} & \textbf{Normalization} \\
+\midrule
+0 & \texttt{total\_particles}   & $\sum_i \texttt{count}_i$ & Min-max \\
+1 & \texttt{total\_energy}      & $\sum_i \varepsilon_i$ & Min-max \\
+2 & \texttt{active\_detectors}  & Number of unique detector IDs & Min-max \\
+3 & \texttt{duration}           & $t_\text{max} - t_\text{min}$ & Min-max \\
+4 & \texttt{central\_energy}    & $\sum_{i \in \mathcal{C}} \varepsilon_i$ & Min-max \\
+\bottomrule
+\multicolumn{4}{l}{\footnotesize $\mathcal{C}$: set of 16 central detector modules closest to the array origin.}
+\end{tabular}
+\end{minipage}
+\end{center}
+
+\section{Quality Factor Definition} \label{sec:apx_qfactor}
+
+The quality factor $Q$ is a standard figure of merit in gamma-ray astronomy that quantifies the signal-to-noise improvement achieved by a classifier. For a given classification threshold, the gamma-ray efficiency $\varepsilon_\gamma$ is the fraction of true gamma events correctly classified, and the proton survival rate $\varepsilon_p$ is the fraction of proton events misclassified as gamma. The quality factor is defined as
+\begin{equation}
+    Q = \frac{\varepsilon_\gamma}{\sqrt{\varepsilon_p}} \ .
+\end{equation}
+A larger $Q$ indicates a better signal-to-noise ratio after classification. For the model presented in this thesis, at the default threshold of $P(\gamma) = 0.5$, the quality factor evaluates to $Q = 5.48$ with $\varepsilon_\gamma = 0.971$.
+
+\section{Angular Resolution: PSF\texorpdfstring{$_{68}$}{68} Definition} \label{sec:apx_psf}
+
+The angular resolution of a ground-based gamma-ray observatory is conventionally reported as a containment radius rather than as a mean error. The reason is that the distribution of angular residuals is not Gaussian: it is asymmetric and carries a tail of poorly reconstructed events, produced by showers whose core falls near the edge of the array or whose front is sampled by few detectors, which would dominate a mean-based figure of merit while affecting only a small fraction of the data. Characterizing the resolution through the shape of the residual distribution rather than through a single moment is long-established practice for scintillator arrays~\shortcite{prahl1993procedure}, and containment radii are the form in which contemporary ground-based arrays such as HAWC report their angular performance~\shortcite{HAWK}.
+
+For each test event, the \textit{angular residual} is the difference between the reconstructed and true zenith angles, $\hat{\theta} - \theta_\text{true}$, and the absolute angular error is $\Delta\theta = |\hat{\theta} - \theta_\text{true}|$. The point spread function at 68\% containment, PSF$_{68}$, is the 68th percentile of the distribution of $\Delta\theta$ over the test set:
+\begin{equation}
+    \text{PSF}_{68} = \inf \left\{ r \geq 0 \ : \ P\left( \Delta\theta \leq r \right) \geq 0.68 \right\} \ .
+\end{equation}
+In words, PSF$_{68}$ is the angular radius around the true direction within which 68\% of reconstructed events fall. The 68\% level is chosen because it corresponds to the fraction of a one-dimensional Gaussian distribution contained within one standard deviation, which makes the quantity directly comparable to a resolution quoted as $\sigma$ for instruments whose residuals happen to be Gaussian, without assuming that they are. For the model presented in this thesis, PSF$_{68} = 0.50\degree$.
+
+\begin{quote}
+\textbf{Scope of this definition.} An observatory normally quotes PSF$_{68}$ over the \textit{space angle} $\psi$, which combines the zenith and azimuth residuals into a single separation on the sky. Here the azimuth is fixed at $\phi = 0\degree$ (Section~\ref{sec:corsika}) and is not reconstructed, so the value above is a zenith-only containment radius: a lower bound on the space-angle PSF$_{68}$ that the same architecture would reach with the azimuth left free. Comparisons with observatories that reconstruct both angles should be read with that restriction in mind.
+\end{quote}

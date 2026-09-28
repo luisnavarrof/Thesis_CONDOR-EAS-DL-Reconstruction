@@ -1,0 +1,29 @@
+name: condor-tf210-gpu
+# Native GPU training through CUDA.
+# Needs an NVIDIA GPU with driver >= 450 (CUDA 11.x support).
+# Tested on an RTX 3050 Ti Laptop GPU (compute capability 8.6) under Windows 11.
+#
+# CUDA and cuDNN come from conda-forge, isolated from any system-wide CUDA.
+#
+# Create with: conda env create -f environment-cuda.yml
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - cudatoolkit=11.2.2
+  - cudnn=8.1.0.77
+  - pip
+  - pip:
+    - tensorflow-gpu==2.10.0
+    - keras==2.10.0
+    - numpy==1.26.4
+    - pandas==2.2.3
+    - matplotlib==3.9.2
+    - seaborn==0.13.2
+    - scikit-learn==1.5.2
+    - optuna==3.6.1
+    - gdown
+    - jupyter
+    - notebook
+    - ipykernel

@@ -1,0 +1,55 @@
+\chapter{Introduction} \label{ch:introduction}
+
+The universe is permeated by a continuous flux of high-energy particles arriving at Earth from all directions. These particles, recognized as cosmic rays, were first identified in the early twentieth century~\shortcite{hess1912beobachtungen} and remain an active area of astrophysical research~\shortcite{bell2013cosmic}. Despite significant experimental progress, the precise locations of their astrophysical sources, as well as the physical mechanisms governing their acceleration to ultra-high energies, have not yet been definitively established~\shortcite{blasi2013origin}. Understanding cosmic rays provides an observational window into some of the most energetic and extreme environments in the universe.
+
+\section{From Cosmic Rays to the CONDOR Observatory}
+
+A central goal of high-energy astrophysics is identifying the acceleration sites of cosmic rays. Because cosmic rays are predominantly charged particles, their trajectories are deflected by galactic magnetic fields, erasing any directional information about their sources by the time they arrive at Earth. Gamma rays, being electrically neutral, travel in straight lines from their production sites and therefore serve as direct tracers of cosmic ray activity~\shortcite{morrison1958gamma}. However, isolating these photon signals from the overwhelming background of hadronic cosmic ray events constitutes a central challenge for ground-based observatories~\shortcite{alfaro2022gamma, deligny2025searches, schneider2026deep}. The physics underlying this challenge is discussed in detail in Chapter~\ref{ch:theo-back}.
+
+When a high-energy primary particle strikes the upper atmosphere, it initiates a multiplying cascade of secondary particles known as an extensive air shower (EAS)~\shortcite{rao1998extensive}. The secondary particles that survive to the detector level form a spatiotemporal footprint across the array. Reconstructing the primary particle's type, energy, and arrival direction from this sparse and stochastic footprint is the central problem of ground-based astroparticle physics and of this thesis.
+
+An observational gap exists in the sub-TeV window between 100 GeV and 1 TeV: space-based instruments such as the Fermi Large Area Telescope (Fermi-LAT) are limited by collection area at higher energies~\shortcite{ackermann2012fermi}, while ground-based installations at altitudes around 4,000 m impose effective energy thresholds\footnote{The \textit{effective energy threshold} is the lowest primary energy at which an array can still detect and reconstruct showers with reasonable efficiency. It is set by how much of the shower survives down to the observation altitude, and is discussed further in Chapter~\ref{ch:theo-back}.} of several hundred GeV. The CONDOR observatory~\shortcite{arratia2025condor}, planned for Cerro Toco in the Atacama Astronomical Park at 5,300 m above sea level, is designed to bridge this gap by intercepting the shower front closer to its atmospheric maximum, lowering the effective energy threshold to approximately 100 GeV.
+
+Analyzing the low-energy events accessible to CONDOR presents a significant computational challenge. At 100 GeV, the spatiotemporal footprint of a shower is sparse, noisy, and subject to large stochastic fluctuations, and extracting the kinematic properties of the primary particle from it is an inverse problem with no closed-form solution.
+
+\section{Deep Learning and Explainability}
+
+Historically, EAS observatories relied on classical parametric algorithms, for example, planar fitting for arrival direction reconstruction~\shortcite{pierre2014reconstruction} and the Nishimura-Kamata-Greisen lateral distribution function~\shortcite{nishimura1958kamata} for energy estimation~\shortcite{kawata2017energy}. While computationally lightweight, these methods show degraded performance under the noise conditions and sparse hit patterns of low-energy showers, and they cannot naturally handle the simultaneous estimation of multiple shower properties.
+
+Deep learning~\shortcite{lecun2015deep} shifts this paradigm by enabling end-to-end representation learning directly from raw detector hits. Convolutional neural networks (CNNs)~\shortcite{lecun1998convolutional} have proven effective at extracting local features from the hit patterns of dense detector arrays~\shortcite{okukawa2024neural}, while Transformer architectures~\shortcite{vaswani2017attention}, through their self-attention mechanism, are well suited for capturing the global, long-range correlations that span the full shower footprint~\shortcite{lin2022survey, langner2024deep}. Despite recent advances, existing frameworks for EAS reconstruction often constrain themselves to single-task objectives or rely on detector geometries dissimilar to CONDOR~\shortcite{erdmann2018deep, okukawa2024neural}, making direct translation difficult. The predecessor to this work~\shortcite{navarro2025multi} introduced a CNN-LSTM architecture for CONDOR that addressed two of the three tasks --- particle classification and zenith angle regression --- but remained limited by sequential processing constraints and the absence of energy estimation as a third reconstruction task. This thesis extends that foundation with a hybrid CNN-Transformer architecture capable of simultaneously addressing gamma-hadron discrimination, zenith angle reconstruction, and primary energy estimation within a unified multi-task framework.
+
+An ongoing challenge in the scientific adoption of deep learning is the tension between predictive performance and physical interpretability~\shortcite{ribeiro2016should}. A model achieving high reconstruction accuracy yields limited scientific value if its predictions rely on non-physical or spurious correlations in the training data. This concern is particularly relevant when the model is trained on data synthesized by a Monte Carlo framework like CORSIKA~\shortcite{Heck1998}, the standard simulation code for extensive air showers, which is described in detail in Section~\ref{sec:corsika}; under these conditions, the risk of learning simulation artifacts rather than genuine shower physics cannot be dismissed without explicit verification. This is why the adoption of explainable artificial intelligence (XAI) methods~\shortcite{adadi2018peeking} is indispensable for understanding the model’s reasoning when generating predictions.
+
+This thesis addresses this requirement through two complementary feature importance methods --- permutation feature importance~\shortcite{altmann2010permutation} and a feature ablation study, which quantify the contribution of each input channel to each reconstruction task by intervening on the input --- together with an analysis of the attention patterns, which describes the temporal focus of the Transformer streams along the shower front. Confirming that these analyses align with physical expectations constitutes a key scientific deliverable of this work, alongside the reconstruction performance itself.
+
+\section{Objectives}
+
+The primary objective of this thesis is to design, evaluate, and interpret a deep learning model for the simultaneous reconstruction of multiple physical properties of extensive air showers, specifically developed for the high-altitude conditions of the CONDOR observatory.
+
+The specific objectives are:
+\begin{enumerate}
+    \item \textbf{To design} and implement a hybrid CNN-Transformer multi-task architecture capable of simultaneously performing gamma-hadron discrimination, zenith angle regression, and primary energy estimation from variable-length sequences of spatiotemporal detector hits.
+    
+    \item \textbf{To devise} a data preprocessing and stratified balancing strategy that mitigates the class and configuration imbalances inherent in Monte Carlo simulation datasets.
+    
+    \item \textbf{To evaluate} the architecture's performance on a held-out test set and compare its reconstruction accuracy against classical baselines and prior deep learning approaches for CONDOR.
+    
+    \item \textbf{To interpret} the learned representations using permutation feature importance, feature ablation, and attention pattern analysis, validating their physical consistency against established shower phenomenology.
+    
+    \item \textbf{To identify} the structural and algorithmic limitations of the current framework and provide a transparent methodological foundation for future adaptation to real detector data once CONDOR begins operations.
+\end{enumerate}
+
+\section{Contributions Beyond the Published Work}
+\label{sec:contributions_intro}
+
+The core multi-task reconstruction results and the three-stream CNN-Transformer architecture have been published in a companion paper in \emph{Astronomy and Computing}~\shortcite{navarro2026transformer}. This thesis extends that published work in several directions that are not covered by the paper:
+\begin{itemize}
+    \item An extended six-stream architecture with independent RAW attention streams per task, enabling hit-level interpretability without convolutional indirection.
+    \item A feature ablation study as a second, independent method for validating feature importance, complementing the permutation-based analysis reported in the paper.
+    \item A ROC analysis grouped by primary energy and zenith angle, revealing the physically consistent energy dependence of discrimination performance.
+    \item A detector robustness study quantifying the fault tolerance of the trained model to missing detectors across the three tasks.
+\end{itemize}
+
+\section{Thesis Structure}
+
+The remainder of this thesis is organized as follows. Chapter~\ref{ch:theo-back} establishes the theoretical foundations of the work, covering the physics of cosmic rays and extensive air showers, the CONDOR observatory and its simulation framework, and the deep learning architectures and explainability methods employed. Chapter~\ref{ch:methodology} describes the full methodological pipeline, from dataset construction and preprocessing through model architecture, hyperparameter optimization, and training configuration. Chapter~\ref{ch:results} presents the results across all three reconstruction tasks and the explainability analysis. Chapter~\ref{ch:conclusions} concludes with a summary of the main findings, a discussion of limitations, and directions for future work.

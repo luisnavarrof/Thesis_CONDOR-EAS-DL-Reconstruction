@@ -1,0 +1,250 @@
+{
+  "sample_size": 200,
+  "n_gamma": 104,
+  "n_proton": 96,
+  "seed": 42,
+  "tasks": {
+    "Particle Classification": {
+      "mean_row_sum": 1.0,
+      "mass_in_first_120": 0.998512989282608,
+      "temporal": {
+        "max_abs": {
+          "observed": 0.01516815725555298,
+          "null_p95": 0.05124726814855442,
+          "p_value": 0.5870646766169154
+        },
+        "mean_abs": {
+          "observed": 0.0015756034575914806,
+          "null_p95": 0.0034103190183349718,
+          "p_value": 0.5671641791044776
+        },
+        "mean_signed": {
+          "observed": -0.00025115958591011896,
+          "null_p95": 0.00037887764000905607,
+          "p_value": 0.23383084577114427
+        },
+        "n_outside_band": 5,
+        "n_elements": 60,
+        "null_median_outside": 1.0,
+        "p_value_n_outside": 0.19900497512437812,
+        "length_stratified": {
+          "max_abs": {
+            "observed": 0.01516815725555298,
+            "null_p95": 0.06382677869629524,
+            "p_value": 0.7562189054726368
+          },
+          "mean_abs": {
+            "observed": 0.0015756034575914806,
+            "null_p95": 0.003790604914070247,
+            "p_value": 0.7064676616915423
+          },
+          "mean_signed": {
+            "observed": -0.00025115958591011896,
+            "null_p95": 0.0006143090653539992,
+            "p_value": 0.746268656716418
+          },
+          "n_outside_band": 2,
+          "n_elements": 60,
+          "null_median_outside": 1.0,
+          "p_value_n_outside": 0.472636815920398
+        }
+      },
+      "spatial": {
+        "max_abs": {
+          "observed": 0.06275417740735903,
+          "null_p95": 0.08029073469890338,
+          "p_value": 0.29850746268656714
+        },
+        "mean_abs": {
+          "observed": 0.004172847449660485,
+          "null_p95": 0.0038699601683162095,
+          "p_value": 0.029850746268656716
+        },
+        "n_outside_band": 20,
+        "n_elements": 120,
+        "null_median_outside": 5.0,
+        "p_value_n_outside": 0.01990049751243781,
+        "length_stratified": {
+          "max_abs": {
+            "observed": 0.06275417740735903,
+            "null_p95": 0.08798120309273996,
+            "p_value": 0.29850746268656714
+          },
+          "mean_abs": {
+            "observed": 0.004172847449660485,
+            "null_p95": 0.003872863858855871,
+            "p_value": 0.014925373134328358
+          },
+          "n_outside_band": 22,
+          "n_elements": 120,
+          "null_median_outside": 5.0,
+          "p_value_n_outside": 0.004975124378109453
+        },
+        "uniform_level": 0.008333333333333333
+      }
+    },
+    "Angle Reconstruction": {
+      "mean_row_sum": 1.0,
+      "mass_in_first_120": 0.8985843389481306,
+      "temporal": {
+        "max_abs": {
+          "observed": 0.013018182109780351,
+          "null_p95": 0.01823184410153776,
+          "p_value": 0.25870646766169153
+        },
+        "mean_abs": {
+          "observed": 0.007365234999986324,
+          "null_p95": 0.00482240256508502,
+          "p_value": 0.004975124378109453
+        },
+        "mean_signed": {
+          "observed": -0.007365234999986324,
+          "null_p95": 0.003679826304084359,
+          "p_value": 0.004975124378109453
+        },
+        "n_outside_band": 34,
+        "n_elements": 60,
+        "null_median_outside": 2.0,
+        "p_value_n_outside": 0.004975124378109453,
+        "length_stratified": {
+          "max_abs": {
+            "observed": 0.013018182109780351,
+            "null_p95": 0.02655420086315337,
+            "p_value": 0.9900497512437811
+          },
+          "mean_abs": {
+            "observed": 0.007365234999986324,
+            "null_p95": 0.008168975011451194,
+            "p_value": 0.39303482587064675
+          },
+          "mean_signed": {
+            "observed": -0.007365234999986324,
+            "null_p95": 0.008059847716821042,
+            "p_value": 0.3482587064676617
+          },
+          "n_outside_band": 8,
+          "n_elements": 60,
+          "null_median_outside": 2.0,
+          "p_value_n_outside": 0.09950248756218906
+        }
+      },
+      "spatial": {
+        "max_abs": {
+          "observed": 0.017464058329858083,
+          "null_p95": 0.028767661692822268,
+          "p_value": 0.7810945273631841
+        },
+        "mean_abs": {
+          "observed": 0.0019179339427991,
+          "null_p95": 0.0020902544035572798,
+          "p_value": 0.23383084577114427
+        },
+        "n_outside_band": 61,
+        "n_elements": 120,
+        "null_median_outside": 5.0,
+        "p_value_n_outside": 0.004975124378109453,
+        "length_stratified": {
+          "max_abs": {
+            "observed": 0.017464058329858083,
+            "null_p95": 0.030109046002213088,
+            "p_value": 0.7860696517412935
+          },
+          "mean_abs": {
+            "observed": 0.0019179339427991,
+            "null_p95": 0.0021360674070580255,
+            "p_value": 0.19402985074626866
+          },
+          "n_outside_band": 52,
+          "n_elements": 120,
+          "null_median_outside": 5.0,
+          "p_value_n_outside": 0.004975124378109453
+        },
+        "uniform_level": 0.008333333333333333
+      }
+    },
+    "Energy Estimation": {
+      "mean_row_sum": 1.0,
+      "mass_in_first_120": 0.9168070120178163,
+      "temporal": {
+        "max_abs": {
+          "observed": 0.011992127642304755,
+          "null_p95": 0.01303996776803101,
+          "p_value": 0.1044776119402985
+        },
+        "mean_abs": {
+          "observed": 0.005896415022596816,
+          "null_p95": 0.004100984582420436,
+          "p_value": 0.004975124378109453
+        },
+        "mean_signed": {
+          "observed": -0.005896415022596816,
+          "null_p95": 0.003295513512141977,
+          "p_value": 0.004975124378109453
+        },
+        "n_outside_band": 27,
+        "n_elements": 60,
+        "null_median_outside": 2.0,
+        "p_value_n_outside": 0.004975124378109453,
+        "length_stratified": {
+          "max_abs": {
+            "observed": 0.011992127642304755,
+            "null_p95": 0.018222984438151547,
+            "p_value": 0.945273631840796
+          },
+          "mean_abs": {
+            "observed": 0.005896415022596816,
+            "null_p95": 0.00711783872186247,
+            "p_value": 0.736318407960199
+          },
+          "mean_signed": {
+            "observed": -0.005896415022596816,
+            "null_p95": 0.007073099815889169,
+            "p_value": 0.6567164179104478
+          },
+          "n_outside_band": 10,
+          "n_elements": 60,
+          "null_median_outside": 3.0,
+          "p_value_n_outside": 0.01990049751243781
+        }
+      },
+      "spatial": {
+        "max_abs": {
+          "observed": 0.04028676727173465,
+          "null_p95": 0.04501492250345999,
+          "p_value": 0.09950248756218906
+        },
+        "mean_abs": {
+          "observed": 0.002867418065647635,
+          "null_p95": 0.0024635873680967264,
+          "p_value": 0.004975124378109453
+        },
+        "n_outside_band": 60,
+        "n_elements": 120,
+        "null_median_outside": 6.0,
+        "p_value_n_outside": 0.004975124378109453,
+        "length_stratified": {
+          "max_abs": {
+            "observed": 0.04028676727173465,
+            "null_p95": 0.05050718557589544,
+            "p_value": 0.23880597014925373
+          },
+          "mean_abs": {
+            "observed": 0.002867418065647635,
+            "null_p95": 0.002683088611200067,
+            "p_value": 0.014925373134328358
+          },
+          "n_outside_band": 50,
+          "n_elements": 120,
+          "null_median_outside": 5.0,
+          "p_value_n_outside": 0.004975124378109453
+        },
+        "uniform_level": 0.008333333333333333
+      }
+    }
+  },
+  "mean_valid_length": 76.905,
+  "uniform_temporal_level": 0.013003055718093752,
+  "mean_length_gamma": 93.36538461538461,
+  "mean_length_proton": 59.072916666666664,
+  "length_arithmetic_offset": -0.006217623731485884
+}

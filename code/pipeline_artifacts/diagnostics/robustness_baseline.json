@@ -1,0 +1,12 @@
+{
+  "baseline": {
+    "particle_acc": 0.9666666666666667,
+    "particle_auc": 0.9896423720496939,
+    "angle_mae": 0.4864450935578207,
+    "energy_mae": 106.51143862915039
+  },
+  "n_events": 3000,
+  "subsample": 3000,
+  "seed": 42,
+  "batch": 16
+}

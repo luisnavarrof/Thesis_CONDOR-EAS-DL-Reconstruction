@@ -1,0 +1,49 @@
+\chapter{Conclusions}
+\label{ch:conclusions}
+
+This thesis developed and evaluated a multi-task CNN-Transformer model for the simultaneous reconstruction of three EAS properties at CONDOR --- gamma-hadron classification, zenith angle, and primary energy --- on CORSIKA-simulated events in the 300--800 GeV range. The architecture extends the three-stream design of~\shortciteA{navarro2026transformer} to six independent Transformer streams, two per task, one over the CNN-processed sequence and one over the raw hit sequence, which makes attention available at the level of individual detector hits.
+
+% ============================================================
+\section{Summary of Contributions}
+\label{sec:contributions}
+% ============================================================
+
+\textbf{A multi-task CNN-Transformer model for EAS reconstruction.} The central contribution is the reconstruction model itself: a single network that recovers particle type, zenith angle, and primary energy in one pass over the detector hits, with a shared convolutional backbone feeding task-specific Transformer streams. It extends the published three-stream design of~\shortciteA{navarro2026transformer} to six streams, adding one attention stream per task that operates directly on the raw hit sequence, so that the weighting each task learns can be examined at the level of individual hits.
+
+\textbf{Multi-task reconstruction in the sub-TeV regime.} The model reaches AUC = 0.991 ($Q$-factor 5.48) for gamma-hadron discrimination, angular MAE = $0.484\degree$ (PSF$_{68} = 0.50\degree$), and energy MAE = 103.72 GeV. The angular resolution improves upon~\shortciteA{navarro2025multi} by a factor of 2.4 and lies well below the $1\degree$ threshold relevant for point-source identification. To the best of our knowledge, this is the only published work addressing the three EAS reconstruction tasks simultaneously at this altitude and energy range with an integrated explainability framework.
+
+\textbf{Performance by energy and zenith angle.} Gamma-hadron discrimination degrades with energy in a physically consistent way (AUC from 0.998 at 300 GeV to 0.981 at 800 GeV) and is stable across the full zenith range (AUC 0.984--0.994).
+
+\textbf{Physically consistent explainability.} Feature ablation and PFI agree on what each task uses: zenith reconstruction is dominated by temporal information by a wide margin (ablation: $+12.4\degree$ of added MAE), consistent with the arrival-time gradient as the primary geometric handle for direction; gamma-hadron discrimination relies on energy deposition and spatial features; and energy estimation is governed by spatial position, consistent with the correlation between lateral extent and primary energy.
+
+\textbf{RAW attention streams and hit-level interpretability.} The RAW Transformer streams produce attention matrices directly over the individual hit sequence, so the weighting learned by each task can be examined at the level of detector hits rather than of CNN features. The three streams learn distinct distributions: classification concentrates $82\%$ of its weight on the first ten hits, angle reconstruction assigns $80\%$ to hits later than the query and peaks near the end of the sequence, and energy estimation lies between the two, in agreement with the feature importance results.
+
+\textbf{Robustness to missing detectors.} The detector dropout analysis characterises how
+the trained reconstruction model responds to missing detector information, measured by
+switching detectors off at inference without retraining. Gamma-hadron classification is the most fault-tolerant task, holding accuracy above $90\%$ with up to approximately $22\%$ of modules offline, while angular and energy reconstruction degrade sooner. Removing the central core is the most damaging block-level failure for classification, whereas angular reconstruction depends at least as much on the surrounding modules, which sample the lateral extent over which the arrival-time gradient is measured; and per module removed, the 20 peripheral units cost almost as much for energy as the central ones, so they are not redundant despite ranking last as a block. Because the model was trained only on the full array, these figures bound the degradation from above and indicate where the reconstruction relies on the array, rather than prescribing how many detectors to build or how to place them.
+
+% ============================================================
+\section{Limitations and Future Work}
+\label{sec:limitations}
+\label{sec:future}
+% ============================================================
+
+The limitations of this work and the lines of research that would address them are presented together, since most of the former define the latter.
+
+\textbf{Simulation-only evaluation.} All results are obtained on CORSIKA-simulated events; CONDOR is a proposed observatory with no measured data yet, so generalization to real detector behaviour, with hardware noise, gain variations, detector aging, and atmospheric conditions not captured by CORSIKA, cannot be assessed here. Once the observatory begins scientific operations the model can be applied to measured events, a transition that will likely require domain adaptation, data-driven calibration of the normalization statistics, and fine-tuning on hybrid simulation-data samples.
+
+\textbf{Energy coverage.} The dataset comprises three discrete energy points (300, 500, and 800 GeV), sufficient to demonstrate multi-task learning in a controlled setting but not representative of the continuous cosmic ray spectrum; the regression-toward-the-mean bias is a direct consequence of that discretization. Performance below 300 GeV, approaching the CONDOR threshold, and above 1 TeV is likewise not characterized. Sampling the energy from a power law would remove the bias and model the flux realistically, at the cost of new CORSIKA simulations and a re-run of the preprocessing pipeline.
+
+\textbf{Fixed azimuthal angle.} All simulated showers use a fixed azimuthal angle of $\phi = 0\degree$. The array geometry gives this simplification little support: in the proposed layout, both the modules and the central grid they form are rectangular rather than square in their two horizontal dimensions, so the array is invariant only under a $180\degree$ rotation, and the choice introduces directional biases in the learned attention patterns and in the regional dropout results (Sections~\ref{subsec:attention} and~\ref{subsec:regional}). Because the core also lands at a different position in each event, $\phi$ cannot be obtained by a geometric transformation of the $\phi = 0\degree$ model and must be learned from a dataset with uniformly sampled azimuth, possibly with positional embeddings that encode detector coordinates explicitly.
+
+\textbf{Attention as an explainability method.} The attention maps describe how each stream weights its input sequence, but they do not attribute the prediction to those inputs, and two properties of the mechanism limit what can be read from them. The weights of each row are normalized over the valid hits of the event, so their scale depends on the number of active modules, which itself differs systematically between gamma and proton showers; comparisons between classes are therefore not directly interpretable as differences in model behaviour. And a map estimated from a finite sample carries structure of its own, which a map shown without an associated uncertainty does not reveal. The analysis is accordingly restricted to the aggregate distribution of the weights per task, and the feature-level conclusions rest on the intervention-based methods of Section~\ref{sec:explainability}.
+
+\textbf{Single training run.} All results come from a single training run with a fixed random seed, so the variability of the metrics across initializations is not characterized. The narrow train-validation gap and the consistency across groups suggest the results are not an artifact of a particular seed, but confidence intervals from independent runs would be stronger evidence.
+
+\textbf{Multi-task advantage not quantified.} The three tasks are optimized jointly under the premise that shared representations benefit physically correlated objectives, but the model was not benchmarked against three independently trained single-task networks, so that advantage is not established here. Training single-task variants, removing the RAW or CNN streams, and varying the number of attention heads would isolate the contribution of each component and settle the question.
+
+\textbf{Single observatory.} The model is tailored to the CONDOR array geometry; the input representation, the normalization statistics, and the learned representations are specific to it, and transfer elsewhere would require retraining. Adapting the framework to instruments such as HAWC, LHAASO, or the future SWGO, which cover complementary energy ranges at different altitudes and geometries, is a natural path toward cross-experiment consistency.
+
+\textbf{Uncertainty quantification.} The model produces point estimates. Bayesian layers, Monte Carlo dropout at inference, or normalizing flows on the output distributions would provide event-by-event confidence intervals, useful for downstream analyses such as source detection and spectral unfolding; this direction is being explored in a related effort applying Bayesian neural networks to the CONDOR reconstruction problem.
+
+\textbf{Array geometry.} Finally, the robustness results motivate evaluating alternative layouts: hexagonal grids, elliptical footprints, and variable-pitch designs could improve reconstruction for a fixed hardware budget. Any such study requires re-running the CORSIKA pipeline on the new detector positions, since the processed dataset encodes the current geometry at the level of individual hit aggregations.

@@ -1,0 +1,17 @@
+{
+  "keras_metrics": {
+    "loss": 0.6692841649055481,
+    "particle_output_loss": 0.15891605615615845,
+    "angle_output_loss": 0.21676695346832275,
+    "energy_output_loss": 0.2381119728088379,
+    "particle_output_f1_score": 0.9699669480323792,
+    "angle_output_mae": 0.48411881923675537,
+    "energy_output_mae": 0.5047193765640259
+  },
+  "custom_metrics": {
+    "particle_accuracy_custom": 0.9699348737621554,
+    "angle_mae_deg_custom": 0.48411890864372253,
+    "energy_mae_GeV_custom": 103.71794128417969,
+    "energy_rmse_GeV_custom": 151.7954559326172
+  }
+}

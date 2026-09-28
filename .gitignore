@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.ruff_cache/
+.venv/
+.env
+
+# Dataset (archived on Zenodo, doi:10.5281/zenodo.17717722)
+code/processed_all_data.pkl
+
+# Local experiment tracking and scratch
+code/pipeline_artifacts/mlruns/
+code/_dev/
+*.log
+
+# LaTeX build products (the PDF is built by CI)
+thesis/*.aux
+thesis/*.bbl
+thesis/*.blg
+thesis/*.lof
+thesis/*.lot
+thesis/*.out
+thesis/*.toc
+thesis/*.synctex.gz
+thesis/*.fdb_latexmk
+thesis/*.fls
+thesis/main.pdf
+thesis/_preview.*
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store

@@ -1,0 +1,63 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite the thesis and the published article."
+title: "Deep learning for extensive air showers reconstruction: an interpretable multi-task CNN-Transformer model for the CONDOR observatory"
+type: software
+authors:
+  - family-names: "Navarro Farías"
+    given-names: "Luis Felipe"
+    affiliation: "Universidad Técnica Federico Santa María"
+repository-code: "https://github.com/luisnavarrof/Thesis_CONDOR-EAS-DL-Reconstruction"
+license: MIT
+keywords:
+  - extensive air showers
+  - gamma/hadron separation
+  - deep learning
+  - transformer
+  - explainable AI
+  - CONDOR
+preferred-citation:
+  type: thesis
+  thesis-type: "Master's thesis"
+  title: "Deep learning for extensive air showers reconstruction: an interpretable multi-task CNN-Transformer model for the CONDOR observatory"
+  authors:
+    - family-names: "Navarro Farías"
+      given-names: "Luis Felipe"
+  institution:
+    name: "Universidad Técnica Federico Santa María"
+    city: "Valparaíso"
+    country: "CL"
+  year: 2026
+references:
+  - type: article
+    title: "Deep learning for extensive air showers reconstruction: An interpretable multi-task CNN-Transformer model for the CONDOR observatory"
+    authors:
+      - family-names: "Navarro"
+        given-names: "Luis"
+      - family-names: "Pezoa"
+        given-names: "Raquel"
+      - family-names: "Viaux"
+        given-names: "Nicolás"
+      - family-names: "Tapia"
+        given-names: "Sebastián"
+      - family-names: "Valdivieso"
+        given-names: "Constanza"
+      - family-names: "Mendizabal"
+        given-names: "Sebastián"
+      - family-names: "Arratia"
+        given-names: "Miguel"
+      - family-names: "Huang"
+        given-names: "Jiajun"
+      - family-names: "Brooks"
+        given-names: "W. K."
+    journal: "Astronomy and Computing"
+    volume: 57
+    start: 101173
+    year: 2026
+    doi: "10.1016/j.ascom.2026.101173"
+  - type: dataset
+    title: "Dataset and Trained Models for CONDOR EAS Reconstruction (CNN-Transformer)"
+    authors:
+      - family-names: "Navarro"
+        given-names: "Luis"
+    doi: "10.5281/zenodo.17717722"
+    year: 2025

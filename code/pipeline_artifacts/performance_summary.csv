@@ -1,0 +1,4 @@
+Task,Primary Metric,Resolution,Efficiency/R²
+Gamma/Hadron,AUC = 0.9907,Q-factor = 5.482,ε_γ = 0.971
+Angle Reconstruction,PSF68 = 0.50°,RMS = 0.74°,Q-factor(<5°) = 0.999
+Energy Estimation,Bias = 103.7 GeV,σ/E = 33.1%,R² = 0.4530

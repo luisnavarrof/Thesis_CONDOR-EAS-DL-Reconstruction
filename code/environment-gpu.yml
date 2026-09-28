@@ -1,0 +1,22 @@
+name: condor-cnn-trans-gpu
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+    - tensorflow-cpu==2.10.0
+    - tensorflow-directml-plugin
+    - numpy==1.26.4
+    - pandas==2.2.3
+    - matplotlib==3.9.2
+    - seaborn==0.13.2
+    - scikit-learn==1.5.2
+    - keras==2.10.0
+    - keras-tuner==1.4.7
+    - optuna==3.6.1
+    - gdown
+    - jupyter
+    - notebook
+    - ipykernel

@@ -1,0 +1,5 @@
+{
+  "angle_raw": "attention_scores_angle",
+  "particle_raw": "attention_scores_class",
+  "energy_raw": "attention_scores_energy"
+}
